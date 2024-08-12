@@ -108,7 +108,7 @@ export async function createCommitFetchingJob(owner: string, repoName: string, l
   }, {
     ...(!once && {
       repeat: {
-        every: 500000 // Repeat every 20 seconds (20000 ms)
+        every: 60 * 60 * 1000 // Repeat every 1 hour (60 mins * 60 secs * 1000 ms)
       }
     })
   });

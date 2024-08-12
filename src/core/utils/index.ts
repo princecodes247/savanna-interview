@@ -1,3 +1,4 @@
+import { env } from "../../config";
 
 export function parseData(data: any): any[] {
   // If the data is an array, return that
@@ -35,27 +36,27 @@ export function parseData(data: any): any[] {
  */
 export const logger = {
   log: (...args: any[]) => {
-    if (process.env.NODE_ENV === 'development') {
+    if (env.isDev) {
       console.log(...args);
     }
   },
   error: (...args: any[]) => {
-    if (process.env.NODE_ENV === 'development') {
+    if (env.isDev) {
       console.error(...args);
     }
   },
   warn: (...args: any[]) => {
-    if (process.env.NODE_ENV === 'development') {
+    if (env.isDev) {
       console.warn(...args);
     }
   },
   info: (...args: any[]) => {
-    if (process.env.NODE_ENV === 'development') {
+    if (env.isDev) {
       console.info(...args);
     }
   },
   debug: (...args: any[]) => {
-    if (process.env.NODE_ENV === 'development') {
+    if (env.isDev) {
       console.debug(...args);
     }
   }

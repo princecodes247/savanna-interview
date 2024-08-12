@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { GITHUB_TOKEN } from '../../config';
 import { NewCommit } from '../database/schema';
 import { logger, parseData } from '../utils';
 
@@ -8,14 +9,14 @@ const client = axios.create({
   baseURL: baseUrl,
   headers: {
     'Accept': 'application/vnd.github+json',
-    'Authorization': `Bearer ${process.env.GITHUB_TOKEN}`,
+    'Authorization': `Bearer ${GITHUB_TOKEN}`,
     'X-GitHub-Api-Version': '2022-11-28'
   }
 });
 
 
 export async function fetchRepositoryDetails(owner: string, repoName: string) {
-  logger.log({ GTH: process.env.GITHUB_TOKEN })
+  logger.log({ GTH: GITHUB_TOKEN })
   const url = `/repos/${owner}/${repoName}`;
   const response = await client.get(url);
   const data = response.data;

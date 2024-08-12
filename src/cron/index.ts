@@ -2,12 +2,13 @@ import { Queue, Worker } from 'bullmq';
 import 'dotenv/config';
 import { and, eq } from 'drizzle-orm';
 import Redis from "ioredis";
+import { REDIS_URL } from '../config';
 import { db, repositories } from '../core/database/schema';
 import { updateCommitsInRepo } from '../core/services/commit';
 import { fetchCommits } from '../core/services/github';
 import { logger } from '../core/utils';
 
-const redis = new Redis(process.env.REDIS_URL, {
+const redis = new Redis(REDIS_URL, {
   maxRetriesPerRequest: null
 })
 

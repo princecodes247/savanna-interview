@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "api:watch": "ts-node-dev --respawn --transpile-only src/api/app.ts",
-    "cron:watch": "ts-node-dev --respawn --transpile-only src/cron/index.ts",
+    "cron:watch": "ts-node-dev --respawn --transpile-only src/jobs/index.ts",
     "build": "tsc -p tsconfig.json",
     "test": "vitest run",
     "test:watch": "vitest",

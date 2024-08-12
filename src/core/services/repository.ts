@@ -1,4 +1,5 @@
 import { and, eq } from 'drizzle-orm';
+import { createCommitFetchingJob } from '../../jobs';
 import { db, repositories } from '../database/schema';
 import { logger } from '../utils';
 import { fetchRepositoryDetails } from './github';
@@ -46,6 +47,7 @@ export async function getRepository(owner: string, repoName: string) {
       const newRepo = createRepository(data, owner)
       const res = await db.insert(repositories).values(newRepo).execute();
       logger.log({ newRepo, res })
+      createCommitFetchingJob(owner, repoName, new Date(Date.now() - 1 * 24 * 60 * 60 * 1000), true)
       return newRepo
     }
     return repository;

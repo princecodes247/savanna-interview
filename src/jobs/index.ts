@@ -100,13 +100,13 @@ async function scheduleCommitFetching() {
  * @param {Date} lastFetchDate - The date of the last commit fetch for this repository.
  * @throws {Error} If there's an issue adding the job to the queue.
  */
-async function createCommitFetchingJob(owner: string, repoName: string, lastFetchDate: Date | null, repeat = true) {
+export async function createCommitFetchingJob(owner: string, repoName: string, lastFetchDate: Date | null, once = false) {
   await commitQueue.add(`fetch-${owner}/${repoName}`, {
     owner: owner,
     repoName: repoName,
     lastFetchDate: lastFetchDate || null // Use Unix epoch if no last fetch date
   }, {
-    ...(repeat && {
+    ...(!once && {
       repeat: {
         every: 500000 // Repeat every 20 seconds (20000 ms)
       }

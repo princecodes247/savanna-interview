@@ -2,15 +2,11 @@ import { relations } from 'drizzle-orm';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import { integer, pgTable, serial, text, timestamp, uniqueIndex } from 'drizzle-orm/pg-core';
 import { Pool } from 'pg';
-import { POSTGRES_DB, POSTGRES_HOST, POSTGRES_PASSWORD, POSTGRES_PORT, POSTGRES_USER } from '../../config';
+import { POSTGRES_URL } from '../../config';
 
 // Setup PostgreSQL connection pool
 export const pool = new Pool({
-  host: POSTGRES_HOST || 'localhost',
-  port: parseInt(POSTGRES_PORT || '5432'),
-  user: POSTGRES_USER || 'postgres',
-  password: POSTGRES_PASSWORD || 'password',
-  database: POSTGRES_DB || 'savanna',
+  connectionString: POSTGRES_URL
 });
 
 

@@ -34,6 +34,8 @@ export const POSTGRES_USER = getEnv('POSTGRES_USER', true);
 export const POSTGRES_PASSWORD = getEnv('POSTGRES_PASSWORD', true);
 export const POSTGRES_PORT = getEnv('POSTGRES_PORT', true);
 export const POSTGRES_DB = getEnv('POSTGRES_DB', true);
+export const POSTGRES_URL = getEnv('POSTGRES_URL', true);
+
 
 // Redis
 export const REDIS_URL = getEnv('REDIS_URL')!;

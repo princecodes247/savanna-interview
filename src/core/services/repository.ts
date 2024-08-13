@@ -45,7 +45,20 @@ export async function getRepository(owner: string, repoName: string) {
     if (!repository) {
       const data = await fetchRepositoryDetails(owner, repoName)
       const newRepo = createRepository(data, owner)
-      const res = await db.insert(repositories).values(newRepo).execute();
+      const res = await db.insert(repositories).values(newRepo).onConflictDoUpdate({
+        target: repositories.full_name, set: {
+          description: newRepo.description,
+          url: newRepo.url,
+          language: newRepo.language,
+          forks_count: newRepo.forks_count,
+          stars_count: newRepo.stars_count,
+          open_issues_count: newRepo.open_issues_count,
+          watchers_count: newRepo.watchers_count,
+          last_fetch_date: newRepo.last_fetch_date,
+          created_at: newRepo.created_at,
+          updated_at: newRepo.updated_at
+        }
+      }).execute();
       logger.log({ newRepo, res })
       createCommitFetchingJob(owner, repoName, new Date(Date.now() - 1 * 24 * 60 * 60 * 1000), true)
       return newRepo
